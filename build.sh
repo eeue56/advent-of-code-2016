@@ -1,3 +1,3 @@
 #!/bin/bash
 
-~/.cabal/bin/idris --execute DayOne.idr
+~/.cabal/bin/idris DayTwo.idr
