@@ -2,6 +2,7 @@ module Main
 
 import ElmInterop
 import DayTwo
+import DayFour
 
 -- a simple function just to say hi to elm
 helloFromIdris : String -> String
@@ -21,7 +22,12 @@ dayTwoMain =
             show $ collectGridPoints defaultKeypad (movesFromLines str) defaultPosition
         )
 
+dayFourMain : JS_IO ()
+dayFourMain =
+    makeAdventApp
+        (show . DayFour.sumIds .  DayFour.collectRealRooms)
+
 -- change this to whatever day you want to work on
 main : JS_IO ()
 main = do
-    dayTwoMain
+    dayFourMain
