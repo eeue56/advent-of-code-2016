@@ -1,3 +1,6 @@
-#!/bin/bash
+#!/bin/bash -ex
 
-~/.cabal/bin/idris DayTwo.idr
+idris Main.idr -o ids.js --codegen javascript
+elm-make --yes elm/Main.elm --output main.js
+
+cat main.js ids.js > actual.js

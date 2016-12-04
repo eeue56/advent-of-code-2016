@@ -1,2 +1,7 @@
 *.ibc
 *.o
+actual.js
+idx.js
+main.js
+elm-stuff
+ids.js
