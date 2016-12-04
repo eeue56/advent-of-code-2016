@@ -25,7 +25,10 @@ dayTwoMain =
 dayFourMain : JS_IO ()
 dayFourMain =
     makeAdventApp
-        (show . DayFour.sumIds .  DayFour.collectRealRooms)
+        (show
+            . filter (\room => DayFour.unencryptName room == "northpole object storage")
+            . DayFour.collectRealRooms
+        )
 
 -- change this to whatever day you want to work on
 main : JS_IO ()

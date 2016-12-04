@@ -51,13 +51,14 @@ allLetters =
 
 lettersWithCount : List Char -> List Char -> List (Char, Nat)
 lettersWithCount _ [] = []
+lettersWithCount [] _ = []
 lettersWithCount word (x::xs) =
-    if amount == 0 then
+    if amount == Z then
         lettersWithCount word xs
     else
         (x, amount) :: (lettersWithCount word xs)
     where
-        amount = List.length $ findIndices (==x) word
+        amount = List.length $ findIndices (== x) word
 
 sortByLetters : (Char, Nat) -> (Char, Nat) -> Ordering
 sortByLetters (x, y) (a, b) =
@@ -73,7 +74,6 @@ roomChecksum (MakeRoom name checksum id_) =
         $ List.take 5
         $ sortBy sortByLetters
         $ lettersWithCount nameAllJoined allLetters
-
     where
         nameAllJoined = unpack $ concat name
 
@@ -117,3 +117,18 @@ export
 sumIds : List Room -> Int
 sumIds =
     sum . map (sectorId)
+
+unencryptLetter : Int -> Char -> Char
+unencryptLetter id_ letter =
+    chr
+        $ (+ 96)
+        $ mod (id_ + (ord letter - 96)) 26
+
+unencryptWord : Int -> String -> String
+unencryptWord id_ =
+    pack . map (unencryptLetter id_) . unpack
+
+export
+unencryptName : Room -> String
+unencryptName (MakeRoom name checksum id_) =
+    unwords $ map (unencryptWord id_) name
